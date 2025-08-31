@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { MapPin, Heart, Phone } from "lucide-react";
+import { Heart, Phone, User, LogOut } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const { user, signOut, loading } = useAuth();
+  const navigate = useNavigate();
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
@@ -29,9 +33,44 @@ const Header = () => {
             <Phone className="h-4 w-4 mr-2" />
             Emergency
           </Button>
-          <Button variant="default" size="sm">
-            Book Now
-          </Button>
+          
+          {!loading && (
+            user ? (
+              <div className="flex items-center gap-4">
+                <div className="hidden sm:flex items-center gap-2 text-sm">
+                  <User className="h-4 w-4" />
+                  <span className="text-foreground">Welcome back!</span>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={signOut}
+                  className="text-primary border-primary hover:bg-primary hover:text-white"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            ) : (
+              <>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate('/auth')}
+                  className="text-primary border-primary hover:bg-primary hover:text-white"
+                >
+                  Sign In
+                </Button>
+                <Button 
+                  variant="default" 
+                  size="sm"
+                  onClick={() => navigate('/auth')}
+                >
+                  Sign Up
+                </Button>
+              </>
+            )
+          )}
         </div>
       </div>
     </header>
