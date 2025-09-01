@@ -2,8 +2,25 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { MapPin, Search, Shield, Clock, Heart } from "lucide-react";
 import heroImage from "@/assets/hero-doctor.jpg";
+import { useState } from "react";
 
 const Hero = () => {
+  const [location, setLocation] = useState("");
+  const [specialty, setSpecialty] = useState("");
+
+  const handleSearch = () => {
+    // Scroll to doctors section
+    const doctorsSection = document.getElementById('doctors');
+    if (doctorsSection) {
+      doctorsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    // Trigger search event for filtering
+    const searchEvent = new CustomEvent('doctorSearch', {
+      detail: { location, specialty }
+    });
+    window.dispatchEvent(searchEvent);
+  };
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background gradient */}
@@ -41,6 +58,8 @@ const Hero = () => {
                 <Input 
                   placeholder="Enter your location" 
                   className="pl-10 h-12 bg-background/50"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </div>
               <div className="relative flex-1">
@@ -48,9 +67,15 @@ const Hero = () => {
                 <Input 
                   placeholder="Choose specialty" 
                   className="pl-10 h-12 bg-background/50"
+                  value={specialty}
+                  onChange={(e) => setSpecialty(e.target.value)}
                 />
               </div>
-              <Button size="lg" className="h-12 px-8 bg-gradient-primary hover:shadow-hover">
+              <Button 
+                size="lg" 
+                className="h-12 px-8 bg-gradient-primary hover:shadow-hover"
+                onClick={handleSearch}
+              >
                 Find Doctors
               </Button>
             </div>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import DoctorCard from "./DoctorCard";
 import { MapPin, Filter } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const mockDoctors = [
   {
@@ -50,6 +51,26 @@ const mockDoctors = [
 ];
 
 const DoctorsSection = () => {
+  const [filteredDoctors, setFilteredDoctors] = useState(mockDoctors);
+  const [searchFilters, setSearchFilters] = useState({ location: "", specialty: "" });
+
+  useEffect(() => {
+    const handleSearch = (event: CustomEvent) => {
+      const { location, specialty } = event.detail;
+      setSearchFilters({ location, specialty });
+      
+      const filtered = mockDoctors.filter(doctor => {
+        const matchesLocation = !location || doctor.location.toLowerCase().includes(location.toLowerCase());
+        const matchesSpecialty = !specialty || doctor.specialty.toLowerCase().includes(specialty.toLowerCase());
+        return matchesLocation && matchesSpecialty;
+      });
+      
+      setFilteredDoctors(filtered);
+    };
+
+    window.addEventListener('doctorSearch', handleSearch as EventListener);
+    return () => window.removeEventListener('doctorSearch', handleSearch as EventListener);
+  }, []);
   return (
     <section id="doctors" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -76,10 +97,27 @@ const DoctorsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
-          {mockDoctors.map((doctor, index) => (
+          {filteredDoctors.map((doctor, index) => (
             <DoctorCard key={index} {...doctor} />
           ))}
         </div>
+        
+        {filteredDoctors.length === 0 && (searchFilters.location || searchFilters.specialty) && (
+          <div className="text-center py-12">
+            <p className="text-lg text-muted-foreground mb-4">
+              No doctors found matching your search criteria.
+            </p>
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                setFilteredDoctors(mockDoctors);
+                setSearchFilters({ location: "", specialty: "" });
+              }}
+            >
+              Clear Filters
+            </Button>
+          </div>
+        )}
 
         <div className="text-center">
           <Button size="lg" variant="outline" className="px-12">
