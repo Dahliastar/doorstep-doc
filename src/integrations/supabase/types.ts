@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          address: string | null
+          amount: number | null
+          appointment_date: string
+          consultation_type: string
+          created_at: string
+          doctor_id: string
+          id: string
+          notes: string | null
+          patient_id: string
+          payment_status: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          address?: string | null
+          amount?: number | null
+          appointment_date: string
+          consultation_type?: string
+          created_at?: string
+          doctor_id: string
+          id?: string
+          notes?: string | null
+          patient_id: string
+          payment_status?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          address?: string | null
+          amount?: number | null
+          appointment_date?: string
+          consultation_type?: string
+          created_at?: string
+          doctor_id?: string
+          id?: string
+          notes?: string | null
+          patient_id?: string
+          payment_status?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       medical_credentials: {
         Row: {
           bio: string | null
@@ -59,6 +104,54 @@ export type Database = {
           updated_at?: string
           verified?: boolean | null
           years_experience?: number | null
+        }
+        Relationships: []
+      }
+      patient_medical_history: {
+        Row: {
+          allergies: string[] | null
+          blood_type: string | null
+          created_at: string
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          id: string
+          insurance_policy_number: string | null
+          insurance_provider: string | null
+          medical_conditions: string[] | null
+          medications: string[] | null
+          notes: string | null
+          patient_id: string
+          updated_at: string
+        }
+        Insert: {
+          allergies?: string[] | null
+          blood_type?: string | null
+          created_at?: string
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          id?: string
+          insurance_policy_number?: string | null
+          insurance_provider?: string | null
+          medical_conditions?: string[] | null
+          medications?: string[] | null
+          notes?: string | null
+          patient_id: string
+          updated_at?: string
+        }
+        Update: {
+          allergies?: string[] | null
+          blood_type?: string | null
+          created_at?: string
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          id?: string
+          insurance_policy_number?: string | null
+          insurance_provider?: string | null
+          medical_conditions?: string[] | null
+          medications?: string[] | null
+          notes?: string | null
+          patient_id?: string
+          updated_at?: string
         }
         Relationships: []
       }

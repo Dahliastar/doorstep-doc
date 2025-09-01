@@ -42,6 +42,15 @@ const Header = () => {
                   <span className="text-foreground">Welcome back!</span>
                 </div>
                 <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate('/profile')}
+                  className="text-primary hover:bg-primary/10"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Profile
+                </Button>
+                <Button 
                   variant="outline" 
                   size="sm"
                   onClick={signOut}
