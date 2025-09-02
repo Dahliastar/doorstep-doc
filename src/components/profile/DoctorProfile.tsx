@@ -9,7 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { UserCircle, GraduationCap, Shield, Plus, X } from 'lucide-react';
+import { UserCircle, GraduationCap, Shield, Plus, X, CreditCard } from 'lucide-react';
+import DoctorSubscriptionPlans from '../DoctorSubscriptionPlans';
 
 interface DoctorProfileProps {
   user: User;
@@ -164,7 +165,7 @@ export function DoctorProfile({ user }: DoctorProfileProps) {
       </div>
 
       <Tabs defaultValue="credentials" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="credentials" className="flex items-center gap-2">
             <GraduationCap className="h-4 w-4" />
             Credentials
@@ -176,6 +177,10 @@ export function DoctorProfile({ user }: DoctorProfileProps) {
           <TabsTrigger value="verification" className="flex items-center gap-2">
             <Shield className="h-4 w-4" />
             Verification
+          </TabsTrigger>
+          <TabsTrigger value="subscription" className="flex items-center gap-2">
+            <CreditCard className="h-4 w-4" />
+            Subscription
           </TabsTrigger>
         </TabsList>
 
@@ -365,6 +370,10 @@ export function DoctorProfile({ user }: DoctorProfileProps) {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value="subscription">
+          <DoctorSubscriptionPlans />
         </TabsContent>
       </Tabs>
 

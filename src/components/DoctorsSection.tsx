@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import DoctorCard from "./DoctorCard";
 import { MapPin, Filter } from "lucide-react";
 import { useState, useEffect } from "react";
+import AppointmentBooking from "./AppointmentBooking";
 
 const mockDoctors = [
   {
@@ -98,7 +99,14 @@ const DoctorsSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
           {filteredDoctors.map((doctor, index) => (
-            <DoctorCard key={index} {...doctor} />
+            <div key={index} className="space-y-4">
+              <DoctorCard {...doctor} />
+              <AppointmentBooking
+                doctorId={`doctor-${index}`}
+                doctorName={doctor.name}
+                specialty={doctor.specialty}
+              />
+            </div>
           ))}
         </div>
         
