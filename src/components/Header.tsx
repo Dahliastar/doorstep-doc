@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, Phone, User, LogOut } from "lucide-react";
+import { Heart, Phone, User, LogOut, BarChart3 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 
@@ -49,6 +49,15 @@ const Header = () => {
                 >
                   <User className="h-4 w-4 mr-2" />
                   Profile
+                </Button>
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate('/dashboard')}
+                  className="text-primary hover:bg-primary/10"
+                >
+                  <BarChart3 className="h-4 w-4 mr-2" />
+                  Dashboard
                 </Button>
                 <Button 
                   variant="outline" 
