@@ -1,5 +1,9 @@
 # Welcome to your Lovable project
 
+## Pitch Deck URL:
+
+https://www.canva.com/design/DAGxdMwuvf8/MmFKD0YT4SfPtnFaiK9w2g/edit?ui=eyJEIjp7IlAiOnsiQiI6ZmFsc2V9fX0
+
 ## Project info
 
 **URL**: https://lovable.dev/projects/d84536d3-c9d3-47d4-b860-bd0973fb48d3
